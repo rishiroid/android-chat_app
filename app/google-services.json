@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "5606872195",
+    "project_id": "hifi-2998a",
+    "storage_bucket": "hifi-2998a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:5606872195:android:f7e69ad321b200af60f7b6",
+        "android_client_info": {
+          "package_name": "rishiz.com.hifi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "5606872195-m8dgqdrd6uak2dgi72rr7c3cnaqn1nqf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZCJz7DBjxH1K-2ZXdWMERc3MpLiN5bAU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "5606872195-m8dgqdrd6uak2dgi72rr7c3cnaqn1nqf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
