@@ -76,7 +76,6 @@ public class FriendsActivity extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     users.add(dataSnapshot.getValue(User.class));
                 }
-                Log.d("Freind", "username" + users.get(1).getUsername());
                 userAdapter = new UserAdapter(users, FriendsActivity.this, onUserClickListener);
                 recyclerView.setAdapter(userAdapter);
                 progressBar.setVisibility(View.GONE);
