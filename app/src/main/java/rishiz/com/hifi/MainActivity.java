@@ -1,11 +1,8 @@
 package rishiz.com.hifi;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,7 +15,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         btnSubmit = findViewById(R.id.btnSubmit);
         txtLoginInfo = findViewById(R.id.loginInfo);
 
-        if(FirebaseAuth.getInstance().getCurrentUser()!=null){
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             launchFriendsActivity();
             finish();
         }
@@ -87,11 +83,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
-        }catch (Exception e){
-            if(edtPassword.getText().toString().length()<6){
+        } catch (Exception e) {
+            if (edtPassword.getText().toString().length() < 6) {
                 Toast.makeText(MainActivity.this, "Password must be at least 6 characters long", Toast.LENGTH_SHORT).show();
-            }else
-            {//need to fix this issue
+            } else {//need to fix this issue
                 Toast.makeText(MainActivity.this, "The email address is badly formatted",
                         Toast.LENGTH_SHORT).show();
             }
@@ -111,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    private void launchFriendsActivity(){
-        startActivity(new Intent(MainActivity.this,FriendsActivity.class));
+
+    private void launchFriendsActivity() {
+        startActivity(new Intent(MainActivity.this, FriendsActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
     }
 }
