@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,22 +55,6 @@ public class MessageActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(MessageActivity.this));
         recyclerView.setAdapter(messageAdapter);
         Glide.with(MessageActivity.this).load(getIntent().getStringExtra("img_of_roommate")).placeholder(R.drawable.ic_baseline_person_24).error(R.drawable.ic_baseline_person_24).into(imgToolbar);
-        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-               // removeMessages(chatRoomId);
-                messages.remove(viewHolder.getAdapterPosition());
-                messageAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
-            }
-        };
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerView);
-
         setUpChatRoom();
     }
 
@@ -86,7 +69,8 @@ public class MessageActivity extends AppCompatActivity {
                 } else if (usernameOfRoommate.compareTo(myUsername) == 0) {
                     chatRoomId = myUsername + usernameOfRoommate;
                 } else {
-                    chatRoomId = myUsername + usernameOfRoommate;
+                    //chatRoomId = myUsername + usernameOfRoommate;
+                    chatRoomId = usernameOfRoommate + myUsername;
                 }
                 attachMessageListener(chatRoomId);
             }
@@ -110,23 +94,6 @@ public class MessageActivity extends AppCompatActivity {
                 recyclerView.scrollToPosition(messages.size() - 1);
                 recyclerView.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    private void removeMessages(String chatRoomId) {
-        FirebaseDatabase.getInstance().getReference("messages/" + chatRoomId).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    dataSnapshot.getRef().removeValue();
-                }
-                messageAdapter.notifyDataSetChanged();
             }
 
             @Override
